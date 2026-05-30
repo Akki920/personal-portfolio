@@ -10,14 +10,14 @@ const publications = [
     venue: 'SPRINGER, JUN 2025',
     description:
       'An AI system for detecting unauthorized land use changes through data acquisition, real-time monitoring, and notification support for authorities.',
-    link: '#',
+    link: 'https://link.springer.com/article/10.1007/s42979-025-04089-9',
   },
   {
     title: 'Object Extraction and Detection Using U2-Net and YOLOv7',
     venue: 'IJRITCC, JAN 2024',
     description:
       'Academic project exploring combined architecture of U2-Net for salient object detection and YOLOv7 for real-time object detection.',
-    link: '#',
+    link: 'https://ijritcc.org/index.php/ijritcc/article/view/8015',
   },
 ];
 
@@ -91,6 +91,8 @@ export function PublicationsSection() {
                   </p>
                   <a
                     href={pub.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 mt-4 text-neon-violet hover:text-white transition-colors text-sm font-medium group/link"
                   >
                     READ PAPER

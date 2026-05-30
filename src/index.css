@@ -334,3 +334,50 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(139, 92, 246, 0.6);
 }
+
+/* ─── LOADER ANIMATIONS ─── */
+@keyframes nodeGlow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.4); }
+}
+
+@keyframes nodePulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes connectionPulse {
+  0%, 100% { opacity: 0.1; stroke: rgba(139, 92, 246, 0.1); }
+  50% { opacity: 0.5; stroke: rgba(167, 139, 250, 0.4); }
+}
+
+@keyframes scanMove {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(80px); }
+}
+
+@keyframes dataPulse {
+  0%, 100% { opacity: 0; r: 0.5; }
+  50% { opacity: 1; r: 1.2; }
+}
+
+.loader-node-glow {
+  animation: nodeGlow 2.5s ease-in-out infinite;
+}
+
+.loader-node {
+  animation: nodePulse 2s ease-in-out infinite;
+}
+
+.loader-connection {
+  animation: connectionPulse 3s ease-in-out infinite;
+}
+
+.loader-scan-line {
+  animation: scanMove 2.5s linear infinite;
+}
+
+.loader-data-pulse {
+  animation: dataPulse 2s ease-in-out infinite;
+}
+

@@ -3,6 +3,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionHeader } from '../components/SectionHeader';
+import { Link } from 'react-router';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,7 @@ const projects = [
       'AI-enabled system for automated land use monitoring — detecting unauthorized changes through satellite data acquisition and real-time analysis. Published research by Springer.',
     image: '/images/project-geovigilance.jpg',
     tags: ['COMPUTER VISION', 'YOLO', 'U2-NET', 'PYTHON'],
+    link: null,
   },
   {
     title: 'Multimodal Document AI Pipeline',
@@ -20,13 +22,15 @@ const projects = [
       'End-to-end document intelligence system using PaddleOCR, YOLO for layout detection, and ViT/DINOv2 for visual feature extraction. Orchestrated inference pipelines with model quantization.',
     image: '/images/project-document-ai.jpg',
     tags: ['OCR', 'VLM', 'LLM', 'JETSON'],
+    link: null,
   },
   {
-    title: 'Edge AI Optimization Suite',
+    title: 'Facial Recognition System',
     description:
-      'System optimization and deployment toolkit for NVIDIA Jetson Orin Nano and Orin NX — model quantization, inference pipeline orchestration, and AWS cloud integration.',
-    image: '/images/project-edge-ai.jpg',
-    tags: ['TENSORRT', 'ONNX', 'EDGE-AI', 'AWS'],
+      'Real-time face detection and recognition pipeline powered by ONNX Runtime with CUDA GPU acceleration. Features MongoDB vector store for face embeddings, quality validation, and a production Flask API.',
+    image: '/images/project-facial-recognition.png',
+    tags: ['ONNX', 'CUDA', 'FLASK', 'MONGODB'],
+    link: '/facial-recognition',
   },
   {
     title: 'Speech & Language Systems',
@@ -34,6 +38,7 @@ const projects = [
       'Text-to-speech synthesis pipeline and speech analysis microservices. Integrated multiple LLM APIs and Ollama for local VLM inferencing.',
     image: '/images/project-speech.jpg',
     tags: ['TTS', 'LLM', 'OLLAMA', 'MICROSERVICES'],
+    link: null,
   },
 ];
 
@@ -105,7 +110,7 @@ export function WorkSection() {
               description="Production AI systems spanning computer vision, multimodal inference, and edge deployment."
             />
             <a
-              href="https://github.com"
+              href="https://github.com/Akki920"
               target="_blank"
               rel="noopener noreferrer"
               className="pill-button-outline text-cta mt-4 inline-flex"
@@ -116,48 +121,59 @@ export function WorkSection() {
 
           {/* Right: Project cards */}
           <div className="lg:w-3/5 flex flex-col gap-8">
-            {projects.map((project, i) => (
-              <div
-                key={project.title}
-                ref={(el) => {
-                  if (el) cardsRef.current[i] = el;
-                }}
-                className="liquid-glass group cursor-pointer"
-              >
-                <div className="aspect-video overflow-hidden rounded-[20px]">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-6 md:p-8">
-                  <h3 className="text-section-h3" style={{ fontSize: '22px' }}>
-                    {project.title}
-                  </h3>
-                  <p className="mt-3" style={{ fontSize: '14px', lineHeight: 1.6, color: 'rgba(255, 255, 255, 0.55)' }}>
-                    {project.description}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 rounded-pill text-label"
-                        style={{
-                          fontSize: '10px',
-                          background: 'rgba(139, 92, 246, 0.12)',
-                          color: '#a78bfa',
-                          border: '1px solid rgba(139, 92, 246, 0.2)',
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
+            {projects.map((project, i) => {
+              const CardWrapper = project.link ? Link : 'div';
+              const cardProps = project.link
+                ? { to: project.link, className: 'liquid-glass group cursor-pointer block' }
+                : { className: 'liquid-glass group cursor-pointer' };
+              return (
+                <CardWrapper
+                  key={project.title}
+                  ref={(el: HTMLElement | null) => {
+                    if (el) cardsRef.current[i] = el as HTMLDivElement;
+                  }}
+                  {...(cardProps as any)}
+                >
+                  <div className="aspect-video overflow-hidden rounded-[20px]">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      loading="lazy"
+                    />
                   </div>
-                </div>
-              </div>
-            ))}
+                  <div className="p-6 md:p-8">
+                    <h3 className="text-section-h3" style={{ fontSize: '22px' }}>
+                      {project.title}
+                    </h3>
+                    <p className="mt-3" style={{ fontSize: '14px', lineHeight: 1.6, color: 'rgba(255, 255, 255, 0.55)' }}>
+                      {project.description}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 rounded-pill text-label"
+                          style={{
+                            fontSize: '10px',
+                            background: 'rgba(139, 92, 246, 0.12)',
+                            color: '#a78bfa',
+                            border: '1px solid rgba(139, 92, 246, 0.2)',
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    {project.link && (
+                      <div className="mt-4 flex items-center gap-1 text-neon-violet text-sm font-medium group-hover:text-white transition-colors">
+                        VIEW DEMO →
+                      </div>
+                    )}
+                  </div>
+                </CardWrapper>
+              );
+            })}
           </div>
         </div>
       </div>

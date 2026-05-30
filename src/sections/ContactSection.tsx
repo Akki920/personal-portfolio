@@ -92,7 +92,7 @@ export function ContactSection() {
             CONNECT ON LINKEDIN
           </a>
           <a
-            href="https://github.com"
+            href="https://github.com/Akki920"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 transition-colors text-sm"

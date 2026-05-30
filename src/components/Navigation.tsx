@@ -7,6 +7,7 @@ const navLinks = [
   { label: 'Work', href: '#work' },
   { label: 'Experience', href: '#experience' },
   { label: 'Publications', href: '#publications' },
+  { label: 'Education', href: '#education' },
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
 ];
@@ -33,7 +34,7 @@ export function Navigation() {
       return;
     }
 
-    const sectionIds = ['work', 'experience', 'publications', 'about', 'skills'];
+    const sectionIds = ['work', 'experience', 'publications', 'education', 'about', 'skills'];
     
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {

@@ -8,6 +8,7 @@ import { HeroSection } from '../sections/HeroSection';
 import { WorkSection } from '../sections/WorkSection';
 import { TimelineSection } from '../sections/TimelineSection';
 import { PublicationsSection } from '../sections/PublicationsSection';
+import { EducationSection } from '../sections/EducationSection';
 import { AboutSection } from '../sections/AboutSection';
 import { SkillsSection } from '../sections/SkillsSection';
 import { ContactSection } from '../sections/ContactSection';
@@ -72,6 +73,9 @@ export default function Home() {
 
         {/* Publications — solid sand bg */}
         <PublicationsSection />
+
+        {/* Education */}
+        <EducationSection />
 
         {/* About — solid sand-dark bg */}
         <AboutSection />

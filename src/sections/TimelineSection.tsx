@@ -37,16 +37,6 @@ const timelineEntries = [
     tags: ['JAVA', 'ANDROID', 'MOBILE'],
     side: 'right' as const,
   },
-  {
-    title: 'B.Tech in CSE with AI',
-    org: 'Parul University',
-    date: '2020 – 2024',
-    location: '',
-    description:
-      'Bachelor of Technology in Computer Science and Engineering with specialization in Artificial Intelligence.',
-    tags: ['AI/ML', 'DEEP LEARNING'],
-    side: 'left' as const,
-  },
 ];
 
 export function TimelineSection() {
