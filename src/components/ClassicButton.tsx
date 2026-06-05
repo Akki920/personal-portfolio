@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-interface PillButtonProps {
+interface ClassicButtonProps {
   children: ReactNode;
   variant?: 'filled' | 'outline';
   href?: string;
@@ -9,19 +9,19 @@ interface PillButtonProps {
   external?: boolean;
 }
 
-export function PillButton({
+export function ClassicButton({
   children,
   variant = 'filled',
   href,
   onClick,
   className = '',
   external = false,
-}: PillButtonProps) {
-  const baseClasses = 'pill-button text-cta transition-all duration-200 hover:-translate-y-0.5';
+}: ClassicButtonProps) {
+  const baseClasses = 'btn-classic text-cta transition-all duration-200 hover:-translate-y-0.5';
   const variantClasses =
     variant === 'filled'
-      ? 'pill-button-filled'
-      : 'pill-button-outline';
+      ? 'btn-classic-filled'
+      : 'btn-classic-outline';
 
   const classes = `${baseClasses} ${variantClasses} ${className}`;
 

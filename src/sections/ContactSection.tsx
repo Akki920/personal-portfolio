@@ -87,7 +87,7 @@ export function ContactSection() {
             href="https://www.linkedin.com/in/akshitjoshi920"
             target="_blank"
             rel="noopener noreferrer"
-            className="pill-button-filled text-cta"
+            className="btn-classic-filled text-cta"
           >
             CONNECT ON LINKEDIN
           </a>

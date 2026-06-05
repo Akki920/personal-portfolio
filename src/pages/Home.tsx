@@ -1,19 +1,35 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, lazy, Suspense } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { VortexCanvas } from '../components/Vortex';
 import { HeroSection } from '../sections/HeroSection';
-import { WorkSection } from '../sections/WorkSection';
-import { TimelineSection } from '../sections/TimelineSection';
-import { PublicationsSection } from '../sections/PublicationsSection';
-import { EducationSection } from '../sections/EducationSection';
-import { AboutSection } from '../sections/AboutSection';
-import { SkillsSection } from '../sections/SkillsSection';
-import { ContactSection } from '../sections/ContactSection';
+
+// Lazy-load below-fold sections — they don't need to be in the initial bundle
+const WorkSection = lazy(() => import('../sections/WorkSection').then(m => ({ default: m.WorkSection })));
+const TimelineSection = lazy(() => import('../sections/TimelineSection').then(m => ({ default: m.TimelineSection })));
+const PublicationsSection = lazy(() => import('../sections/PublicationsSection').then(m => ({ default: m.PublicationsSection })));
+const EducationSection = lazy(() => import('../sections/EducationSection').then(m => ({ default: m.EducationSection })));
+const AboutSection = lazy(() => import('../sections/AboutSection').then(m => ({ default: m.AboutSection })));
+const SkillsSection = lazy(() => import('../sections/SkillsSection').then(m => ({ default: m.SkillsSection })));
+const ContactSection = lazy(() => import('../sections/ContactSection').then(m => ({ default: m.ContactSection })));
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Minimal fallback while lazy sections load
+function SectionSkeleton() {
+  return (
+    <div className="section-padding content-container">
+      <div className="flex flex-col gap-6">
+        <div className="shimmer" style={{ width: '200px', height: '14px', background: 'rgba(255,255,255,0.03)', borderRadius: '4px' }} />
+        <div className="shimmer" style={{ width: '60%', height: '40px', background: 'rgba(255,255,255,0.02)', borderRadius: '8px' }} />
+        <div className="shimmer" style={{ width: '80%', height: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '4px' }} />
+        <div className="shimmer" style={{ width: '70%', height: '16px', background: 'rgba(255,255,255,0.02)', borderRadius: '4px' }} />
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const scrollProgress = useRef(0);
@@ -62,29 +78,37 @@ export default function Home() {
 
       {/* Content */}
       <main className="relative">
-        {/* Hero — transparent, vortex visible */}
+        {/* Hero — above the fold, loaded eagerly */}
         <HeroSection />
 
-        {/* Work — solid sand bg, covers vortex */}
-        <WorkSection />
+        {/* Below-fold sections — lazy loaded */}
+        <Suspense fallback={<SectionSkeleton />}>
+          <WorkSection />
+        </Suspense>
 
-        {/* Timeline — solid sand-dark bg */}
-        <TimelineSection />
+        <Suspense fallback={<SectionSkeleton />}>
+          <TimelineSection />
+        </Suspense>
 
-        {/* Publications — solid sand bg */}
-        <PublicationsSection />
+        <Suspense fallback={<SectionSkeleton />}>
+          <PublicationsSection />
+        </Suspense>
 
-        {/* Education */}
-        <EducationSection />
+        <Suspense fallback={<SectionSkeleton />}>
+          <EducationSection />
+        </Suspense>
 
-        {/* About — solid sand-dark bg */}
-        <AboutSection />
+        <Suspense fallback={<SectionSkeleton />}>
+          <AboutSection />
+        </Suspense>
 
-        {/* Skills — solid sand bg */}
-        <SkillsSection />
+        <Suspense fallback={<SectionSkeleton />}>
+          <SkillsSection />
+        </Suspense>
 
-        {/* Contact CTA — charcoal bg, vortex faintly visible */}
-        <ContactSection />
+        <Suspense fallback={<SectionSkeleton />}>
+          <ContactSection />
+        </Suspense>
       </main>
     </>
   );

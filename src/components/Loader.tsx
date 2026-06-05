@@ -2,6 +2,10 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface LoaderProps {
+  readySignals: {
+    fonts: boolean;
+    images: boolean;
+  };
   onComplete: () => void;
 }
 
@@ -33,8 +37,6 @@ function getBrowserInfo(): { name: string; version: string } {
   return { name, version: version.split('.')[0] || '' };
 }
 
-
-
 // Neural network node positions for the animation
 const NODES = Array.from({ length: 24 }, (_, i) => ({
   id: i,
@@ -56,60 +58,58 @@ for (let i = 0; i < NODES.length; i++) {
   }
 }
 
-export function Loader({ onComplete }: LoaderProps) {
-  const [progress, setProgress] = useState(0);
-  const [phase, setPhase] = useState(0);
-  const [browserInfo, setBrowserInfo] = useState({ name: '...', version: '' });
+// Each milestone is weighted equally at ~33%
+const MILESTONE_WEIGHT = {
+  fonts: 30,
+  images: 35,
+  minTime: 35,
+};
+
+export function Loader({ readySignals, onComplete }: LoaderProps) {
   const [visible, setVisible] = useState(true);
+  const [browserInfo, setBrowserInfo] = useState({ name: '...', version: '' });
+  const [minTimeReady, setMinTimeReady] = useState(false);
   const hasCompleted = useRef(false);
 
-  const phases = [
-    'INITIALIZING SYSTEM...',
-    'LOADING NEURAL NETWORKS...',
-    'ANALYZING CONNECTION...',
-    'SYSTEM READY',
-  ];
+  // Phase messages based on what's actually happening
+  const getPhase = useCallback((): { text: string; index: number } => {
+    if (!readySignals.fonts) return { text: 'LOADING FONTS & STYLES...', index: 0 };
+    if (!readySignals.images) return { text: 'LOADING ASSETS...', index: 1 };
+    if (!minTimeReady) return { text: 'INITIALIZING SYSTEMS...', index: 2 };
+    return { text: 'SYSTEM READY', index: 3 };
+  }, [readySignals, minTimeReady]);
 
-  const completeLoader = useCallback(() => {
-    if (hasCompleted.current) return;
-    hasCompleted.current = true;
-    setPhase(3);
-    setProgress(100);
-    setTimeout(() => {
-      setVisible(false);
-      setTimeout(onComplete, 600);
-    }, 500);
-  }, [onComplete]);
+  // Calculate real progress
+  const progress = 
+    (readySignals.fonts ? MILESTONE_WEIGHT.fonts : 0) +
+    (readySignals.images ? MILESTONE_WEIGHT.images : 0) +
+    (minTimeReady ? MILESTONE_WEIGHT.minTime : 0);
 
+  const phase = getPhase();
+
+  // Detect browser
   useEffect(() => {
     setBrowserInfo(getBrowserInfo());
   }, []);
 
+  // Minimum time floor: 1.5s so animation isn't jarring on fast connections
   useEffect(() => {
-    let raf: number;
-    const startTime = Date.now();
-    const duration = 2800;
+    const timer = setTimeout(() => setMinTimeReady(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
-    const tick = () => {
-      const elapsed = Date.now() - startTime;
-      const pct = Math.min((elapsed / duration) * 100, 100);
-      setProgress(pct);
-
-      if (pct < 35) setPhase(0);
-      else if (pct < 65) setPhase(1);
-      else if (pct < 90) setPhase(2);
-      else setPhase(3);
-
-      if (pct < 100) {
-        raf = requestAnimationFrame(tick);
-      } else {
-        completeLoader();
-      }
-    };
-
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [completeLoader]);
+  // Complete when ALL signals are true
+  useEffect(() => {
+    if (hasCompleted.current) return;
+    if (readySignals.fonts && readySignals.images && minTimeReady) {
+      hasCompleted.current = true;
+      // Small pause at 100% so user sees "SYSTEM READY"
+      setTimeout(() => {
+        setVisible(false);
+        setTimeout(onComplete, 600);
+      }, 400);
+    }
+  }, [readySignals, minTimeReady, onComplete]);
 
   return (
     <AnimatePresence>
@@ -209,14 +209,14 @@ export function Loader({ onComplete }: LoaderProps) {
           {/* Phase text */}
           <div className="text-center mb-8">
             <motion.p
-              key={phase}
+              key={phase.index}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               className="text-label tracking-[0.25em]"
               style={{ color: '#a78bfa', fontSize: '12px' }}
             >
-              {phases[phase]}
+              {phase.text}
             </motion.p>
           </div>
 
@@ -233,7 +233,8 @@ export function Loader({ onComplete }: LoaderProps) {
                   background: 'linear-gradient(90deg, #8b5cf6, #a78bfa, #c084fc)',
                   boxShadow: '0 0 12px rgba(139, 92, 246, 0.6)',
                 }}
-                transition={{ duration: 0.1 }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
               />
             </div>
             <div className="flex justify-between mt-2">
@@ -274,10 +275,13 @@ export function Loader({ onComplete }: LoaderProps) {
                 STATUS
               </span>
               <span
-                className="block font-mono text-green-400"
-                style={{ fontSize: '12px' }}
+                className="block font-mono"
+                style={{
+                  fontSize: '12px',
+                  color: progress >= 100 ? '#22c55e' : '#a78bfa',
+                }}
               >
-                SECURE
+                {progress >= 100 ? 'READY' : 'LOADING'}
               </span>
             </div>
           </div>

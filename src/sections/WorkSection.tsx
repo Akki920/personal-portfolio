@@ -9,12 +9,20 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
+    title: 'Facial Recognition System',
+    description:
+      'Real-time face detection and recognition pipeline powered by ONNX Runtime with CUDA GPU acceleration. Features MongoDB vector store for face embeddings, quality validation, and a production Flask API.',
+    image: '/images/project-facial-recognition.png',
+    tags: ['ONNX', 'CUDA', 'FLASK', 'MONGODB'],
+    link: '/facial-recognition',
+  },
+  {
     title: 'GeoVigilance Labs',
     description:
       'AI-enabled system for automated land use monitoring — detecting unauthorized changes through satellite data acquisition and real-time analysis. Published research by Springer.',
     image: '/images/project-geovigilance.jpg',
     tags: ['COMPUTER VISION', 'YOLO', 'U2-NET', 'PYTHON'],
-    link: null,
+    link: '#publications',
   },
   {
     title: 'Multimodal Document AI Pipeline',
@@ -23,14 +31,6 @@ const projects = [
     image: '/images/project-document-ai.jpg',
     tags: ['OCR', 'VLM', 'LLM', 'JETSON'],
     link: null,
-  },
-  {
-    title: 'Facial Recognition System',
-    description:
-      'Real-time face detection and recognition pipeline powered by ONNX Runtime with CUDA GPU acceleration. Features MongoDB vector store for face embeddings, quality validation, and a production Flask API.',
-    image: '/images/project-facial-recognition.png',
-    tags: ['ONNX', 'CUDA', 'FLASK', 'MONGODB'],
-    link: '/facial-recognition',
   },
   {
     title: 'Speech & Language Systems',
@@ -113,7 +113,7 @@ export function WorkSection() {
               href="https://github.com/Akki920"
               target="_blank"
               rel="noopener noreferrer"
-              className="pill-button-outline text-cta mt-4 inline-flex"
+              className="btn-classic-outline text-cta mt-4 inline-flex"
             >
               GITHUB PROFILE
             </a>
@@ -122,9 +122,16 @@ export function WorkSection() {
           {/* Right: Project cards */}
           <div className="lg:w-3/5 flex flex-col gap-8">
             {projects.map((project, i) => {
-              const CardWrapper = project.link ? Link : 'div';
+              const isHash = project.link?.startsWith('#');
+              const CardWrapper = project.link ? (isHash ? 'a' : Link) : 'div';
               const cardProps = project.link
-                ? { to: project.link, className: 'liquid-glass group cursor-pointer block' }
+                ? (isHash
+                    ? { href: project.link, className: 'liquid-glass group cursor-pointer block', onClick: (e: React.MouseEvent) => {
+                        e.preventDefault();
+                        const el = document.querySelector(project.link!);
+                        el?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    : { to: project.link, className: 'liquid-glass group cursor-pointer block' })
                 : { className: 'liquid-glass group cursor-pointer' };
               return (
                 <CardWrapper
@@ -167,7 +174,7 @@ export function WorkSection() {
                     </div>
                     {project.link && (
                       <div className="mt-4 flex items-center gap-1 text-neon-violet text-sm font-medium group-hover:text-white transition-colors">
-                        VIEW DEMO →
+                        {isHash ? 'VIEW PUBLICATION' : 'VIEW DEMO'} →
                       </div>
                     )}
                   </div>

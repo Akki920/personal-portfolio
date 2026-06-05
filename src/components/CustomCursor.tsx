@@ -195,8 +195,8 @@ export function CustomCursor() {
           translateY: '-50%',
           background: 'rgba(167, 139, 250, 0.25)',
           border: '1.5px solid rgba(167, 139, 250, 0.5)',
-          backdropFilter: 'blur(3px)',
-          WebkitBackdropFilter: 'blur(3px)',
+          backdropFilter: isHovered ? 'none' : 'blur(3px)',
+          WebkitBackdropFilter: isHovered ? 'none' : 'blur(3px)',
           boxShadow: '0 0 10px rgba(139, 92, 246, 0.4)',
         }}
         animate={{
@@ -204,17 +204,17 @@ export function CustomCursor() {
           background: isClicked
             ? 'rgba(167, 139, 250, 0.4)'
             : isHovered
-            ? 'rgba(167, 139, 250, 0.12)'
+            ? 'rgba(167, 139, 250, 0)'
             : 'rgba(167, 139, 250, 0.25)',
           borderColor: isClicked
             ? 'rgba(192, 132, 252, 0.8)'
             : isHovered
-            ? 'rgba(167, 139, 250, 0.8)'
+            ? 'rgba(167, 139, 250, 0.6)'
             : 'rgba(167, 139, 250, 0.5)',
           boxShadow: isClicked
             ? '0 0 18px rgba(139, 92, 246, 0.8)'
             : isHovered
-            ? '0 0 14px rgba(139, 92, 246, 0.5)'
+            ? '0 0 14px rgba(139, 92, 246, 0.3)'
             : '0 0 10px rgba(139, 92, 246, 0.4)',
         }}
         transition={{ type: 'spring', stiffness: 350, damping: 25 }}

@@ -144,7 +144,7 @@ export function Navigation() {
               href="https://www.linkedin.com/in/akshitjoshi920"
               target="_blank"
               rel="noopener noreferrer"
-              className="pill-button-filled text-cta ml-4"
+              className="btn-classic-filled text-cta ml-4"
             >
               CONNECT
             </a>
@@ -208,7 +208,7 @@ export function Navigation() {
               href="https://www.linkedin.com/in/akshitjoshi920"
               target="_blank"
               rel="noopener noreferrer"
-              className="pill-button-filled text-cta mt-6"
+              className="btn-classic-filled text-cta mt-6"
             >
               CONNECT
             </motion.a>

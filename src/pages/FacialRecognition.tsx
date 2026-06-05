@@ -1,9 +1,9 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Upload, Video, AlertCircle, CheckCircle2, XCircle, Clock, Wifi, WifiOff, ArrowLeft, Trash2 } from 'lucide-react';
+import { Upload, Video, AlertCircle, CheckCircle2, XCircle, Clock, Wifi, WifiOff, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router';
 
-const FR_API_BASE = 'http://localhost:8000';
+const FR_API_BASE = '/fr-api';
 
 type Tab = 'add' | 'session';
 type ConnectionStatus = 'checking' | 'connected' | 'disconnected';
@@ -416,7 +416,7 @@ export default function FacialRecognition() {
                     <button
                       onClick={handleRegister}
                       disabled={!selectedFile || !faceName.trim() || registering || connStatus !== 'connected'}
-                      className="pill-button-filled text-cta mt-2 disabled:opacity-30 disabled:cursor-not-allowed disabled:transform-none"
+                      className="btn-classic-filled text-cta mt-2 disabled:opacity-30 disabled:cursor-not-allowed disabled:transform-none"
                     >
                       {registering ? 'REGISTERING...' : 'REGISTER FACE'}
                     </button>
@@ -558,7 +558,7 @@ export default function FacialRecognition() {
                     <button
                       onClick={startSession}
                       disabled={connStatus !== 'connected'}
-                      className="pill-button-filled text-cta disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="btn-classic-filled text-cta disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       {sessionEnded ? 'RESTART SESSION' : 'START SESSION'}
                     </button>

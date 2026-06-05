@@ -221,7 +221,7 @@ export default function Admin() {
               <button
                 type="submit"
                 disabled={!password || loginLoading || cooldown > 0 || blocked}
-                className="w-full pill-button-filled text-cta py-3.5 disabled:opacity-30 disabled:cursor-not-allowed disabled:transform-none"
+                className="w-full btn-classic-filled text-cta py-3.5 disabled:opacity-30 disabled:cursor-not-allowed disabled:transform-none"
               >
                 {loginLoading ? 'VERIFYING...' : cooldown > 0 ? `COOLDOWN (${cooldown}s)` : blocked ? 'BLOCKED' : 'AUTHENTICATE'}
               </button>
@@ -277,7 +277,7 @@ export default function Admin() {
           <div className="flex items-center gap-4">
             <button
               onClick={fetchStats}
-              className="pill-button-outline text-cta px-4 py-2"
+              className="btn-classic-outline text-cta px-4 py-2"
               disabled={statsLoading}
             >
               {statsLoading ? 'LOADING...' : 'REFRESH'}

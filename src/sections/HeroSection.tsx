@@ -140,7 +140,7 @@ export function HeroSection() {
         <div ref={ctaRef} className="mt-12 flex items-center justify-center gap-4 flex-wrap">
           <button
             onClick={handleWorkClick}
-            className="pill-button-filled text-cta"
+            className="btn-classic-filled text-cta"
           >
             VIEW MY WORK
           </button>

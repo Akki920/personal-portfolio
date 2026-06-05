@@ -3,10 +3,201 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Akshit Joshi Portfolio</title>
+
+    <!-- SEO Meta Tags -->
+    <title>Akshit Joshi — AI/ML Engineer | Computer Vision & Deep Learning</title>
+    <meta name="description" content="Portfolio of Akshit Joshi — AI/ML Engineer building production AI systems spanning computer vision, LLMs, VLMs, and edge deployment. From research to deployment." />
+    <meta name="keywords" content="AI Engineer, ML Engineer, Computer Vision, Deep Learning, ONNX, CUDA, LLM, VLM, Portfolio, Akshit Joshi" />
+    <meta name="author" content="Akshit Joshi" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://akshitjoshi.com" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Akshit Joshi — AI/ML Engineer" />
+    <meta property="og:description" content="Building production AI systems that see, understand, and reason. Computer vision, LLMs, VLMs — from research to deployment." />
+    <meta property="og:url" content="https://akshitjoshi.com" />
+    <meta property="og:site_name" content="Akshit Joshi Portfolio" />
+    <meta property="og:image" content="https://akshitjoshi.com/images/portrait-akshit.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Akshit Joshi — AI/ML Engineer" />
+    <meta name="twitter:description" content="Building production AI systems spanning computer vision, LLMs, VLMs, and edge deployment." />
+    <meta name="twitter:image" content="https://akshitjoshi.com/images/portrait-akshit.jpg" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Akshit Joshi",
+      "url": "https://akshitjoshi.com",
+      "jobTitle": "AI/ML Engineer",
+      "description": "Building production AI systems spanning computer vision, LLMs, VLMs, and edge deployment.",
+      "sameAs": [
+        "https://github.com/Akki920",
+        "https://www.linkedin.com/in/akshitjoshi920"
+      ],
+      "knowsAbout": ["Computer Vision", "Deep Learning", "ONNX Runtime", "CUDA", "LLM", "VLM", "Edge AI", "Python", "TensorRT"]
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Preload critical font -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" as="style" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" />
+
+    <!-- Inline Skeleton Styles — renders instantly before any JS loads -->
+    <style>
+      body { margin: 0; background: #0a0a0f; overflow-x: hidden; }
+
+      .skeleton-wrapper {
+        position: fixed; inset: 0; z-index: 1;
+        display: flex; flex-direction: column;
+        background: #0a0a0f;
+      }
+
+      /* Skeleton nav */
+      .skel-nav {
+        height: 64px; width: 100%;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0 clamp(24px, 5vw, 80px);
+        box-sizing: border-box;
+      }
+      .skel-nav-logo {
+        width: 180px; height: 14px;
+        background: rgba(255,255,255,0.04);
+        border-radius: 4px;
+      }
+      .skel-nav-links {
+        display: flex; gap: 8px; align-items: center;
+      }
+      .skel-nav-pill {
+        width: 320px; height: 40px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
+        border-radius: 9999px;
+      }
+      .skel-nav-btn {
+        width: 80px; height: 36px; margin-left: 12px;
+        background: rgba(139,92,246,0.08);
+        border: 1px solid rgba(139,92,246,0.15);
+        border-radius: 9999px;
+      }
+
+      /* Skeleton hero */
+      .skel-hero {
+        flex: 1;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 24px; padding: 0 24px;
+      }
+      .skel-eyebrow {
+        width: 220px; height: 12px;
+        background: rgba(139,92,246,0.08);
+        border-radius: 4px;
+      }
+      .skel-headline {
+        width: min(600px, 80vw); height: 72px;
+        background: rgba(255,255,255,0.03);
+        border-radius: 8px;
+      }
+      .skel-headline-2 {
+        width: min(480px, 65vw); height: 72px;
+        background: rgba(255,255,255,0.03);
+        border-radius: 8px;
+      }
+      .skel-subtext {
+        width: min(500px, 70vw); height: 16px;
+        background: rgba(255,255,255,0.02);
+        border-radius: 4px;
+      }
+      .skel-subtext-2 {
+        width: min(420px, 55vw); height: 16px;
+        background: rgba(255,255,255,0.02);
+        border-radius: 4px;
+      }
+      .skel-cta {
+        width: 160px; height: 44px; margin-top: 16px;
+        background: rgba(139,92,246,0.08);
+        border: 1px solid rgba(139,92,246,0.12);
+        border-radius: 9999px;
+      }
+
+      /* Shimmer animation */
+      .shimmer {
+        position: relative; overflow: hidden;
+      }
+      .shimmer::after {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(139,92,246,0.04) 40%,
+          rgba(139,92,246,0.08) 50%,
+          rgba(139,92,246,0.04) 60%,
+          transparent 100%
+        );
+        animation: shimmerMove 2s ease-in-out infinite;
+      }
+      @keyframes shimmerMove {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+
+      /* Hide skeleton once React mounts */
+      #root:not(:empty) + .skeleton-fallback,
+      .skeleton-wrapper.hide { display: none; }
+
+      /* Hide on small screens: nav pill */
+      @media (max-width: 768px) {
+        .skel-nav-links { display: none; }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Instant skeleton — visible before any JS loads -->
+    <div class="skeleton-wrapper skeleton-fallback" id="skeleton-fallback">
+      <div class="skel-nav">
+        <div class="skel-nav-logo shimmer"></div>
+        <div class="skel-nav-links">
+          <div class="skel-nav-pill shimmer"></div>
+          <div class="skel-nav-btn shimmer"></div>
+        </div>
+      </div>
+      <div class="skel-hero">
+        <div class="skel-eyebrow shimmer"></div>
+        <div class="skel-headline shimmer"></div>
+        <div class="skel-headline-2 shimmer"></div>
+        <div style="height: 16px;"></div>
+        <div class="skel-subtext shimmer"></div>
+        <div class="skel-subtext-2 shimmer"></div>
+        <div class="skel-cta shimmer"></div>
+      </div>
+    </div>
+
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Remove skeleton once React hydrates -->
+    <script>
+      const observer = new MutationObserver(() => {
+        const root = document.getElementById('root');
+        if (root && root.children.length > 0) {
+          const skel = document.getElementById('skeleton-fallback');
+          if (skel) skel.style.display = 'none';
+          observer.disconnect();
+        }
+      });
+      observer.observe(document.getElementById('root'), { childList: true });
+    </script>
   </body>
 </html>
