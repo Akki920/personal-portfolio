@@ -76,7 +76,7 @@ export function AboutSection() {
               }}
             >
               <img
-                src="/images/portrait-akshit.jpg"
+                src={`${import.meta.env.BASE_URL}images/portrait-akshit.jpg`}
                 alt="Akshit Joshi - AI/ML Engineer"
                 className="w-full h-full object-cover"
                 loading="lazy"

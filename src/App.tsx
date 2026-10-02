@@ -38,7 +38,7 @@ function AppContent() {
 
 // Preload critical images used in the hero section
 const CRITICAL_IMAGES = [
-  '/images/portrait-akshit.jpg',
+  `${import.meta.env.BASE_URL}images/portrait-akshit.jpg`,
 ];
 
 export default function App() {

@@ -12,7 +12,7 @@ const projects = [
     title: 'Facial Recognition System',
     description:
       'Real-time face detection and recognition pipeline powered by ONNX Runtime with CUDA GPU acceleration. Features MongoDB vector store for face embeddings, quality validation, and a production Flask API.',
-    image: '/images/project-facial-recognition.png',
+    image: `${import.meta.env.BASE_URL}images/project-facial-recognition.png`,
     tags: ['ONNX', 'CUDA', 'FLASK', 'MONGODB'],
     link: '/facial-recognition',
   },
@@ -20,7 +20,7 @@ const projects = [
     title: 'GeoVigilance Labs',
     description:
       'AI-enabled system for automated land use monitoring — detecting unauthorized changes through satellite data acquisition and real-time analysis. Published research by Springer.',
-    image: '/images/project-geovigilance.jpg',
+    image: `${import.meta.env.BASE_URL}images/project-geovigilance.jpg`,
     tags: ['COMPUTER VISION', 'YOLO', 'U2-NET', 'PYTHON'],
     link: '#publications',
   },
@@ -28,7 +28,7 @@ const projects = [
     title: 'Multimodal Document AI Pipeline',
     description:
       'End-to-end document intelligence system using PaddleOCR, YOLO for layout detection, and ViT/DINOv2 for visual feature extraction. Orchestrated inference pipelines with model quantization.',
-    image: '/images/project-document-ai.jpg',
+    image: `${import.meta.env.BASE_URL}images/project-document-ai.jpg`,
     tags: ['OCR', 'VLM', 'LLM', 'JETSON'],
     link: null,
   },
@@ -36,7 +36,7 @@ const projects = [
     title: 'Speech & Language Systems',
     description:
       'Text-to-speech synthesis pipeline and speech analysis microservices. Integrated multiple LLM APIs and Ollama for local VLM inferencing.',
-    image: '/images/project-speech.jpg',
+    image: `${import.meta.env.BASE_URL}images/project-speech.jpg`,
     tags: ['TTS', 'LLM', 'OLLAMA', 'MICROSERVICES'],
     link: null,
   },
