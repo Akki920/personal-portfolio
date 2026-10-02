@@ -1,4 +1,11 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.join(__dirname, '.env') });
+
 import express from 'express';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
@@ -291,6 +298,11 @@ app.get('/api/analytics/stats', requireAuth, async (req, res) => {
     console.error('[Admin] Stats error:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
+});
+
+// ─── 404 CATCH-ALL FOR UNKNOWN API ENDPOINTS ───
+app.use('/api', (req, res) => {
+  res.status(404).json({ error: 'Endpoint not found' });
 });
 
 // ─── START ───

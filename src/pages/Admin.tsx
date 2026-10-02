@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, Lock, Eye, EyeOff, Users, Clock, BarChart3, AlertTriangle, Ban } from 'lucide-react';
+import { useSEO } from '../hooks/useSEO';
 
 const API_BASE = '/api';
 
@@ -41,6 +42,11 @@ function formatDate(dateStr: string): string {
 }
 
 export default function Admin() {
+  useSEO({
+    title: 'Admin Dashboard — Akshit Joshi',
+    description: 'Portfolio Analytics Admin Dashboard',
+    canonicalUrl: 'https://akshitjoshi.com/admin',
+  });
   const [token, setToken] = useState<string | null>(localStorage.getItem('admin_token'));
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);

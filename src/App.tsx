@@ -9,7 +9,7 @@ import { useAnalytics } from './hooks/useAnalytics';
 import Home from './pages/Home';
 
 // Lazy-load rarely-visited pages to reduce initial bundle
-const FacialRecognition = lazy(() => import('./pages/FacialRecognition'));
+// const FacialRecognition = lazy(() => import('./pages/FacialRecognition'));
 const Admin = lazy(() => import('./pages/Admin'));
 
 function AppContent() {
@@ -26,7 +26,7 @@ function AppContent() {
         }>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
-            <Route path="/facial-recognition" element={<FacialRecognition />} />
+            {/* <Route path="/facial-recognition" element={<FacialRecognition />} /> */}
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </Suspense>

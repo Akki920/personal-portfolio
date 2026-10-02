@@ -6,7 +6,7 @@ export default defineConfig({
   base: process.env.GITHUB_ACTIONS === 'true' ? '/personal-portfolio/' : '/',
   plugins: [react()],
   server: {
-    allowedHosts: true, // Tells Vite's security bouncer to step aside
+    allowedHosts: true, // Tells Vite's security bouncer to step aside for dev tunnel
     port: 3001,
     proxy: {
       '/api': {
@@ -17,6 +17,33 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/fr-api/, ''),
+      },
+    },
+  },
+  preview: {
+    allowedHosts: true, // Allows Cloudflare tunnel host for preview/production mode
+    port: 3001,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3002',
+        changeOrigin: true,
+      },
+      '/fr-api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/fr-api/, ''),
+      },
+    },
+  },
+  build: {
+    chunkSizeWarningLimit: 1500,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          three: ['three', '@react-three/fiber', '@react-three/drei'],
+          motion: ['framer-motion', 'gsap'],
+          vendor: ['react', 'react-dom', 'react-router'],
+        },
       },
     },
   },

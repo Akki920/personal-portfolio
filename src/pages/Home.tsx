@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { VortexCanvas } from '../components/Vortex';
 import { HeroSection } from '../sections/HeroSection';
+import { useSEO } from '../hooks/useSEO';
 
 // Lazy-load below-fold sections — they don't need to be in the initial bundle
 const WorkSection = lazy(() => import('../sections/WorkSection').then(m => ({ default: m.WorkSection })));
@@ -32,6 +33,7 @@ function SectionSkeleton() {
 }
 
 export default function Home() {
+  useSEO();
   const scrollProgress = useRef(0);
   const lenisRef = useRef<Lenis | null>(null);
 

@@ -14,7 +14,7 @@ const projects = [
       'Real-time face detection and recognition pipeline powered by ONNX Runtime with CUDA GPU acceleration. Features MongoDB vector store for face embeddings, quality validation, and a production Flask API.',
     image: `${import.meta.env.BASE_URL}images/project-facial-recognition.png`,
     tags: ['ONNX', 'CUDA', 'FLASK', 'MONGODB'],
-    link: '/facial-recognition',
+    link: null,
   },
   {
     title: 'GeoVigilance Labs',
