@@ -2,8 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  // GitHub project pages are served from /<repository-name>/.
-  base: process.env.GITHUB_ACTIONS === 'true' ? '/personal-portfolio/' : '/',
+  // GitHub Pages is configured with the custom domain at the site root.
+  base: '/',
   plugins: [react()],
   server: {
     allowedHosts: true, // Tells Vite's security bouncer to step aside for dev tunnel
