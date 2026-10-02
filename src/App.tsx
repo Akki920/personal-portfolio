@@ -1,35 +1,24 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
-import { Routes, Route, useLocation } from 'react-router';
+import { useState, useEffect } from 'react';
+import { Navigate, Routes, Route, useLocation } from 'react-router';
 import { AnimatePresence } from 'framer-motion';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import { CustomCursor } from './components/CustomCursor';
 import { Loader } from './components/Loader';
-import { useAnalytics } from './hooks/useAnalytics';
 import Home from './pages/Home';
-
-// Lazy-load rarely-visited pages to reduce initial bundle
-// const FacialRecognition = lazy(() => import('./pages/FacialRecognition'));
-const Admin = lazy(() => import('./pages/Admin'));
 
 function AppContent() {
   const location = useLocation();
-  useAnalytics();
 
   return (
     <>
       <CustomCursor />
       <Navigation />
       <AnimatePresence mode="wait">
-        <Suspense fallback={
-          <div className="min-h-screen" style={{ background: '#0a0a0f' }} />
-        }>
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<Home />} />
-            {/* <Route path="/facial-recognition" element={<FacialRecognition />} /> */}
-            <Route path="/admin" element={<Admin />} />
-          </Routes>
-        </Suspense>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </AnimatePresence>
       <Footer />
     </>
