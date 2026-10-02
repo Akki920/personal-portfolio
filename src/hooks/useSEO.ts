@@ -8,7 +8,7 @@ interface SEOProps {
   ogImage?: string;
 }
 
-const DEFAULT_TITLE = 'Akshit Joshi (Akshit) — AI/ML Engineer | AI & Computer Vision Specialist';
+const DEFAULT_TITLE = 'Akshit Joshi (Akshit) — AI/ML Engineer | AI & Computer Vision Engineer';
 const DEFAULT_DESC = 'Akshit Joshi (Akshit) is a leading AI/ML Engineer and Artificial Intelligence developer specializing in computer vision, LLMs, VLMs, and production AI systems.';
 const DEFAULT_KEYWORDS = 'Akshit, Akshit Joshi, Joshi, Joshi Akshit, AI Engineer, AI/ML Engineer, AI, Artificial Intelligence, Machine Learning Engineer, Computer Vision, Deep Learning, ONNX, CUDA, LLM, VLM, Portfolio';
 const DEFAULT_CANONICAL = 'https://akshitjoshi.com';
